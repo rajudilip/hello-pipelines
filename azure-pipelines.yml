@@ -3,20 +3,19 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
+trigger: # kick off the pipeline when any changes in master
 - master
 
-pool:
+pool: # Agent pool, what kind of machine to use VM
   vmImage: 'ubuntu-latest'
 
-container: mcr.microsoft.com/dotnet/core/sdk:3.0
+container: mcr.microsoft.com/dotnet/core/sdk:3.0 # run my pipeline on this container
 
 steps:
 - task: DotNetCoreCLI@2
   inputs: 
     command: build
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: '**/*Tests*.csproj'
+    projects: '**/*Tests.csproj'
